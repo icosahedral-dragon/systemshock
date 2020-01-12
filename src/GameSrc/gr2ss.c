@@ -114,6 +114,10 @@ void ss_scale_string(char *s, short x, short y) {
                 use_font = RES_megaMediumLEDFont;
             break;
         }
+	// Check if the alternative font is available before using it.
+	if (use_font != ID_NULL && !ResInUse(use_font)) {
+	    use_font = ID_NULL; // fall back to existing font
+	}
 #ifdef STEREO_SUPPORT
         if ((rv == SVGA_CONV_SCREEN) && inp6d_stereo_active) {
             if (use_font == ID_NULL) {
